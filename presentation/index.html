@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <title>Traefik</title>
   <meta name="description"
     content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
@@ -43,16 +43,12 @@
 
 <body>
   <main role="main">
-    <article id="webslides" class="vertical">
-      <!-- Quick Guide
-          - Each parent <section> in the <article id="webslides"> element is an individual slide.
-          - Vertical sliding = <article id="webslides" class="vertical">
-          - <div class="wrap"> = container 90% / <div class="wrap size-50"> = 45%;
-        -->
-
-      <section class="bg-black">
-        <span class="background"
-          style="background-image:url('https://images.unsplash.com/photo-1547058337-e8679fe091dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80')">
+    <article id="webslides">
+      <section class="bg-black" style="overflow: hidden;">
+        <span class="background dark" style="background-image:url('https://images.unsplash.com/photo-1547058337-e8679fe091dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80'); background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center center;
+         ">
           <div id="particles-js"></div>
         </span>
         <div class="wrap aligncenter">
@@ -61,16 +57,59 @@
           </h4>
         </div>
       </section>
+
+      <section>
+        <span class="background-right-bottom"
+          style="background-image:url('static/images/Felix_trans_grey.png'); background-size: 30%;">
+        </span>
+        <div class="wrap">
+          <h1><strong>Who am I</strong></h1>
+          <p>
+            <ul class="description size-30">
+              <li><strong>Felix Wiedmann</strong></li>
+              <li><strong>DevOps Engineer @MARKANT MSI</strong></li>
+              <li><strong>Interested in Cloud-Native, Go Lang & Firefighting</strong></li>
+            </ul>
+        </div>
+      </section>
+
+      <section class="bg-black">
+        <span class="background dark"
+          style="background-image:url('https://images.unsplash.com/photo-1574027542338-98e75acfd385?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80');">
+        </span>
+        <div class="wrap">
+          <h1><strong>Which router/reverse proxy do you use?</strong></h1>
+        </div>
+      </section>
+
+      <section>
+        <span class="background-right-bottom"
+          style="background-image:url('https://pbs.twimg.com/media/CcZdW37UcAA9DZz?format=png&name=4096x4096'); background-size: 40%;">
+        </span>
+        <div class="wrap">
+          <h1><strong>Traefik</strong></h1>
+          <p>
+            <ul class="description bulletpoints size-20">
+              <li><strong>CNCF member</strong></li>
+              <li><strong>Founded in 2016</strong></li>
+              <li><strong>Developed by Containous</strong></li>
+              <li><strong>Written in Go Lang</strong></li>
+              <li><strong>Open Source (MIT)</strong></li>
+              <li><strong>27k GitHub Stars, 10M+ Downloads</strong></li>
+              <li><strong>Current supported Versions 1.7 & 2.1</strong></li>
+            </ul>
+        </div>
+      </section>
     </article>
   </main>
 
-  <!-- A global footer
+  <footer class="bg-black">
+    <div class="wrap">
+      <p><i class="fab fa-twitter"> felix_wiedmann</i>
+      </p>
+    </div>
 
-     <footer role="contentinfo">
-      <div class="wrap">
-        <p>An <a href="https://github.com/webslides/webslides">open source solution</a>, by <a href="https://twitter.com/webslides">@webslides</a>.</p>
-      </div>
-    </footer>  -->
+  </footer>
 
   <!-- Required -->
   <script src="static/js/webslides.js"></script>

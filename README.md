@@ -10,6 +10,8 @@ slides about traefik 2.0 and its features
 -   Working as a DevOps Engineer, responsible for a hybrid cloud platform  with kubernetes as basis
 -   interested in cloud-native plattform, Go Lang & Firefighting
 
+### which router do you use and why?
+
 ### Short traefik overview
 
 -   the cloud native edge router
