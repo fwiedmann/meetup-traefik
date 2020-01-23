@@ -70,9 +70,7 @@ cloud native apps should be managed by autonomous systems like Kubernetes
 -   Observerability through Metrics which contains telemetry and health reporting, support for tracing via the Open Tracing, Jaeger & Zipkin
 -   HTTPS Out of the Box: Support for Lets Encrypt, ACME & custom certs -> no excuses for no https anymore and no cert-bot required. AUTMATIC CERT renewal!!!
 -   Http support (obvious) and TCP support
--   Middleware: Fully customize your routes.
 -   Canary Deployment: Rolling out releases to a subset of users.
--   Mirroring: Fork incoming requests and send it to different services.
 
 ### Architecture / How It Works / Concept
 
