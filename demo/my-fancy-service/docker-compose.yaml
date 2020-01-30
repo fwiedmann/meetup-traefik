@@ -1,0 +1,28 @@
+version: "3.3"
+services:
+  router:
+    image: nginx:latest
+    hostname: my-fancy-service
+    container_name: test
+    restart: always
+    networks:
+      - traefik_lan
+    expose:
+      - "80"
+    volumes:
+      - "./presentation:/usr/share/nginx/html"
+    labels:
+      # create a new middleware names "to-https"
+      - "traefik.http.middlewares.to-https.redirectscheme.scheme=https"
+      # create a new router for http requests
+      - "traefik.http.routers.svc1-http.rule=Host(`fancy.meetup.localhost`)"
+      - "traefik.http.routers.svc1-http.entrypoints=web"
+      - "traefik.http.routers.svc1-http.middlewares=to-https"
+      # create a new router for https requests
+      - "traefik.http.routers.svc1-https.entrypoints=websecure"
+      - "traefik.http.routers.svc1-https.rule=Host(`fancy.meetup.localhost`)"
+      - "traefik.http.routers.svc1-https.tls"
+
+networks:
+  traefik_lan:
+    external: true

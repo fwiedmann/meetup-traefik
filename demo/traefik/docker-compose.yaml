@@ -5,6 +5,8 @@ services:
     hostname: traefik
     container_name: traefik
     restart: always
+    networks:
+      - lan
     ports:
       - "80:80"
       - "8080:8080"
@@ -31,6 +33,8 @@ services:
     hostname: prometheus
     container_name: prometheus
     restart: always
+    networks:
+      - lan
     volumes:
       - ./prom-config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     command:
@@ -51,6 +55,9 @@ services:
     image: grafana/grafana:6.5.3
     user: "2133:2133"
     container_name: grafana
+    restart: always
+    networks:
+      - lan
     volumes:
       - grafana_data:/var/lib/grafana/
       - "./grafana-config/grafana-prom-data-source.yml:/etc/grafana/provisioning/datasources/grafana-prom-data-source.yml"
@@ -73,3 +80,7 @@ services:
 
 volumes:
   grafana_data:
+
+networks:
+  lan:
+    driver: bridge

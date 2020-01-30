@@ -1,0 +1,29 @@
+name: Go
+on: [push, pull_request]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Docker image for master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.ref == 'refs/heads/master'
+        run: |
+          docker build -t wiedmannfelix/differ:latest .
+      - name: Push Docker image for master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.ref == 'refs/heads/master'
+        run: |
+          docker login -u wiedmannfelix -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push wiedmannfelix/differ:latest
+      - name: Build Docker image
+        if: github.ref != 'refs/heads/master'
+        run: |
+          docker build -t wiedmannfelix/differ:development .
+      - name: Push Docker image
+        if: github.ref != 'refs/heads/master'
+        run: |
+          docker login -u wiedmannfelix -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push wiedmannfelix/differ:development
