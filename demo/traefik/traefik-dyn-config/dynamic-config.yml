@@ -1,0 +1,8 @@
+# Dynamic configuration
+
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/wildcard.meetup.localhost.pem
+        keyFile: /certs/wildcard.meetup.localhost-key.pem

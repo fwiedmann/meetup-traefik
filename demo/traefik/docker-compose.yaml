@@ -1,0 +1,75 @@
+version: "3.3"
+services:
+  router:
+    image: traefik:2.1.3
+    hostname: traefik
+    container_name: traefik
+    restart: always
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./traefik.yml:/etc/traefik/traefik.yml"
+      - "./traefik-dyn-config:/dyn-config"
+      - "./certs:/certs"
+    labels:
+      # create a new middleware names "to-https"
+      - "traefik.http.middlewares.to-https.redirectscheme.scheme=https"
+      # create a new router for http requests
+      - "traefik.http.routers.api-http.rule=Host(`traefik.meetup.localhost`)"
+      - "traefik.http.routers.api-http.entrypoints=web"
+      - "traefik.http.routers.api-http.middlewares=to-https"
+      # create a new router for https requests
+      - "traefik.http.routers.api-https.service=api@internal"
+      - "traefik.http.routers.api-https.entrypoints=websecure"
+      - "traefik.http.routers.api-https.rule=Host(`traefik.meetup.localhost`)"
+      - "traefik.http.routers.api-https.tls"
+  prometheus:
+    image: prom/prometheus:v2.15.2
+    hostname: prometheus
+    container_name: prometheus
+    restart: always
+    volumes:
+      - ./prom-config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    expose:
+      - 9090
+    labels:
+      # create a new router for http requests
+      - "traefik.http.routers.prom-http.rule=Host(`prometheus.meetup.localhost`)"
+      - "traefik.http.routers.prom-http.entrypoints=web"
+      - "traefik.http.routers.prom-http.middlewares=to-https"
+      # create a new router for https requests
+      - "traefik.http.routers.prom-https.entrypoints=websecure"
+      - "traefik.http.routers.prom-https.rule=Host(`prometheus.meetup.localhost`)"
+      - "traefik.http.routers.prom-https.tls"
+
+  grafana:
+    image: grafana/grafana:6.5.3
+    user: "2133:2133"
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana/
+      - "./grafana-config/grafana-prom-data-source.yml:/etc/grafana/provisioning/datasources/grafana-prom-data-source.yml"
+      - "./grafana-config/dashboard-init-config.yml:/etc/grafana/provisioning/dashboards/dashboard-init-config.yml"
+      - "./grafana-config/dashboards:/init-dashboards"
+    environment:
+      - "GF_SECURITY_ADMIN_PASSWORD=admin"
+      - "GF_INSTALL_PLUGINS=grafana-piechart-panel"
+    expose:
+      - 3000
+    labels:
+      # create a new router for http requests
+      - "traefik.http.routers.grafana-http.rule=Host(`grafana.meetup.localhost`)"
+      - "traefik.http.routers.grafana-http.entrypoints=web"
+      - "traefik.http.routers.grafana-http.middlewares=to-https"
+      # create a new router for https requests
+      - "traefik.http.routers.grafana-https.entrypoints=websecure"
+      - "traefik.http.routers.grafana-https.rule=Host(`grafana.meetup.localhost`)"
+      - "traefik.http.routers.grafana-https.tls"
+
+volumes:
+  grafana_data:
