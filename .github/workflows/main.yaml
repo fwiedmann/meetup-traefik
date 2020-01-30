@@ -10,20 +10,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: github.ref == 'refs/heads/master'
         run: |
-          docker build -t wiedmannfelix/differ:latest .
+          docker build -t wiedmannfelix/traefik-presentation:latest .
       - name: Push Docker image for master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: github.ref == 'refs/heads/master'
         run: |
           docker login -u wiedmannfelix -p ${{ secrets.DOCKER_PASSWORD }}
-          docker push wiedmannfelix/differ:latest
+          docker push wiedmannfelix/traefik-presentation:latest
       - name: Build Docker image
         if: github.ref != 'refs/heads/master'
         run: |
-          docker build -t wiedmannfelix/differ:development .
+          docker build -t wiedmannfelix/traefik-presentation:development .
       - name: Push Docker image
         if: github.ref != 'refs/heads/master'
         run: |
           docker login -u wiedmannfelix -p ${{ secrets.DOCKER_PASSWORD }}
-          docker push wiedmannfelix/differ:development
+          docker push wiedmannfelix/traefik-presentation:development

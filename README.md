@@ -4,7 +4,7 @@
   </a>
 
   <p align="center">
-     A cloud native edge route 
+     A cloud native edge router 
     <br>
     <a href="https://github.com/fwiedmann/traefik-presentation/releases/latest">Latest release</a>
     ·
