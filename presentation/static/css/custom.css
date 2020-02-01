@@ -5,3 +5,8 @@
 body {
     overflow: hidden; /* Hide scrollbars */
   }
+
+
+p,li,h2 {
+   font-size: xx-large !important;
+}
