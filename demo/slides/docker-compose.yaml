@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+  router:
+    image: wiedmannfelix/traefik-presentation:latest
+    hostname: slides
+    container_name: slides
+    restart: always
+    networks:
+      - traefik_lan
+    expose:
+      - "80"
+    labels:
+      # create a new router for http requests
+      - "traefik.http.routers.slides-http.rule=Host(`slides.meetup.localhost`)"
+      - "traefik.http.routers.slides-http.entrypoints=web"
+      - "traefik.http.routers.slides-http.middlewares=to-https"
+      # create a new router for https requests
+      - "traefik.http.routers.slides-https.entrypoints=websecure"
+      - "traefik.http.routers.slides-https.rule=Host(`slides.meetup.localhost`)"
+      - "traefik.http.routers.slides-https.tls"
+
+networks:
+  traefik_lan:
+    external: true
