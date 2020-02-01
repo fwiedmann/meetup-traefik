@@ -1,4 +1,4 @@
-name: Go
+name: Slides
 on: [push, pull_request]
 jobs:
   build:
@@ -21,6 +21,7 @@ jobs:
       - name: Build Docker image
         if: github.ref != 'refs/heads/master'
         run: |
+          ls -lisa
           docker build -t wiedmannfelix/traefik-presentation:development .
       - name: Push Docker image
         if: github.ref != 'refs/heads/master'
