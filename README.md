@@ -44,7 +44,28 @@ This demo includes:
 
 ### Run the demo
 
-create certs
-move certs
+First install a local CA
+
+```bash
+mkcert -install
+```
+
+Bootsrap the demo
+
+```bash
 make pres
-make nuke
+```
+
+You can now browse to the following:
+
+-   <https://slides.meetup.localhost>
+-   <https://traefik.meetup.localhost/dashboard/#/>
+-   <https://prometheus.meetup.localhost>
+-   <https://grafana.meetup.localhost> (user/password: admin)
+-   <https://fancy.meetup.localhost>
+
+Delete all:
+
+```bash
+    make nuke
+```
